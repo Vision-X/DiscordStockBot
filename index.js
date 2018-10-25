@@ -1,6 +1,6 @@
 console.log("____ Bot is running ____");
 
-const env = require('dotenv').load();
+require('dotenv').load();
 
 // const fs = require('fs');
 // const request = require('request');
@@ -28,17 +28,30 @@ app.use(cors());
 ////////////////////////////////////////////
 
 bot.on('message', function(message) {
-  if (message.content === '!commands') {
+	if (message.author == bot.user) {
+		return
+	} else {
+  	if (message.content === '!commands') {
     message.reply("!latest");
     message.reply("!help");
     message.reply("!twitter");
-  }
+  	}
+	}
 });
 
-bot.on('message', function(m) {
-  if (m.content === '!latest') {
-    m.reply("*** Latest Trending Stocks... ***  \n 1) DVLP - 253.62 USD \n 2) SMDB - 1,200.33 USD");
-  }
+bot.on('message', function(message) {
+	if (message.author == bot.user) {
+		return
+	} else {
+  	if (message.content === '!latest') {
+			console.log(message.author);
+    	message.reply("*** Latest Trending Stocks... ***  \n 1) DVLP - 253.62 USD \n 2) SMDB - 1,200.33 USD");
+  	}
+		if (message.content === '!help') {
+			console.log(message.author);
+			message.reply("*** Help? ***  \n Nothing useful right now " + message.author.username + ", come back later!");
+		}
+	}
 })
 
 
